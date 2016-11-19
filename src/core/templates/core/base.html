@@ -43,7 +43,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
             </div>
             <div class="float-xs-right form-inline form-group-sm">
                 {% if user.is_authenticated %}
-                    <a class="nav-item nav-link" href="{% url 'mainpage:logout' %}">Выйти из аккаунта</a>
+                    <a class="nav-item nav-link" href="{% url 'core:logout' %}">Выйти из аккаунта</a>
                 {% else %}
                     <form action="{% url 'core:login' %}" method="post"> {% csrf_token %}
                         <label class="sr-only"

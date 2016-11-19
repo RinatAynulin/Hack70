@@ -11,7 +11,7 @@ class User(AbstractUser):
 
     permission = models.IntegerField(default=0) #0 - student, 1 - prep and so on
 
-    USER_TYPE = (('Student', u'Студент'), ('Teacher', u'Преподаватель'))
+    USER_TYPE = ((None, u'Ваша должность'), ('Student', u'Студент'), ('Teacher', u'Преподаватель'))
     user_type = models.CharField(u'должность', choices=USER_TYPE, max_length=25, blank=False)
 
 
@@ -21,6 +21,6 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('mainpage:user', kwargs={'slug': self.username})
+        return reverse('core:user', kwargs={'slug': self.username})
 
 
