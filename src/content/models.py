@@ -10,5 +10,6 @@ class GeneralModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     course = models.ForeignKey('courses.Course', related_name='posts')
 
-    class Meta:
-        abstract = True
+
+class Document(models.Model):
+    document = models.FilePathField(path="/documents", )

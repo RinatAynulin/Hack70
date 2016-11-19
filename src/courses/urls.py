@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
-from .views import CourseView
+
+from courses.views import course_page
 
 urlpatterns = [
-    url(r'^(?P<chair_slug>\w+)/(?P<pk>\d+)/$', CourseView.as_view(), name='course'),
+    url(r'^$', course_page, name='mainpage'),
 ]

@@ -1,13 +1,29 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.views.generic import View
-from django.views.generic import ListView, CreateView, UpdateView, DetailView
-from .models import Course
 
-# def course_view(request, *args, **kwargs):
-#     print(request, args, kwargs)
+# Create your views here.
+from django.views.generic import ListView
 
-class CourseView(DetailView):
+from courses.models import Chair, Course
+
+
+def course_page(request):
+    return render(request, 'courses/course_page.html')
+
+
+class ChairList(ListView):
+    template_name = 'courses/chairs.html'
+    context_object_name = 'chairs'
+    model = Chair
+
+    def get_queryset(self):
+        return Chair.objects.all()
+
+
+class CourseList(ListView):
+    template_name = 'courses/courses.html'
+    context_object_name = 'courses'
     model = Course
-    context_object_name = 'course'
-    template_name = 'courses/course.html'
+
+
+    def get_queryset(self):
+        return Course.objects.all()
