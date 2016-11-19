@@ -7,10 +7,10 @@ from votes.models import PostVote
 
 
 class GeneralModel(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="posts")
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="user_posts")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    course = models.ForeignKey('courses.Course', related_name='posts')
+    course = models.ForeignKey('courses.Course', related_name='course_posts')
 
 
 class Post(GeneralModel):

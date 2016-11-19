@@ -12,10 +12,18 @@ class GeneralModel(models.Model):
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        abstract = True
+
 
 class Chair(GeneralModel):
-    pass
+    class Meta:
+        verbose_name = u'Chair'
+        verbose_name_plural = u'Chairs'
 
 
 class Course(GeneralModel):
-    chair = models.ForeignKey(Chair, related_name='courses')
+    chair = models.ForeignKey(Chair, related_name='chair_courses')
+    class Meta:
+        verbose_name = u'Course'
+        verbose_name_plural = u'courses'
