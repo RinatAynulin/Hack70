@@ -9,3 +9,7 @@ class GeneralModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     course = models.ForeignKey('courses.Course', related_name='posts')
+
+
+class Document(models.Model):
+    document = models.FilePathField(path="/documents", )
