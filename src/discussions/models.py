@@ -23,7 +23,7 @@ class Post(GeneralModel):
         ordering = ('-created_at',)
 
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def score(self):
