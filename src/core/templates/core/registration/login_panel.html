@@ -1,0 +1,33 @@
+{% url 'mainpage:login' as login_url %}
+{% url 'mainpage:register' as register_url %}
+{% url 'mainpage:logout' as logout_url %}
+{% url 'photos:create_photo' as newphoto_url %}
+
+
+<div>
+    {% if user.is_anonymous %}
+        <div style="float: left;">
+            {% if request.path != login_url and request.path != register_url %}
+                <form action="{% url 'mainpage:login' %}" method="post" next='{{ request.path }}'> {% csrf_token %}
+                    {{ authform.label }}
+                    {{ authform }}
+                    <input type="hidden" id='id_next' name='next' value='{{ request.path }}'>
+                    <input type="submit" value="Войти">
+                </form>
+            {% endif %}
+        </div>
+        <div style="float: right;" align="right">
+            Вы не авторизованы <br>
+            <a href='{{ login_url }}'> Авторизация </a> <br>
+            <a href='{{ register_url }}'> Регистрация </a> <br>
+        </div>
+        <br><br><br>
+    {% else %}
+        <div align="right">
+            {% url 'mainpage:user' slug=user.username as profile %}
+            Привет, <a href="{{ profile }}">{{ user.username }}</a> <br>
+            <a href="{{ newphoto_url }}"> Добавить фото </a> <br>
+            <a href="{{ logout_url }}"> Выйти из аккаунта </a> <br>
+        </div>
+    {% endif %}
+</div>

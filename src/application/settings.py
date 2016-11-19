@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# User model definition
+AUTH_USER_MODEL = 'core.User'
 
 # Application definition
 
@@ -37,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
     'widget_tweaks',
+
 ]
 
 MIDDLEWARE = [
@@ -63,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.context_login',
             ],
         },
     },
@@ -125,5 +130,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media/')
 
 #Login settings
+MAIN_PAGE = '/'
 #LOGIN_REDIRECT_URL = "mainpage:home"
-#LOGIN_URL = "mainpage:login"
+LOGIN_URL = "core:login"

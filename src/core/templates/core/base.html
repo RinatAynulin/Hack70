@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <title>{% block title %}Hello!{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    {% load staticfiles %}
+    {% load widget_tweaks %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-flex.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+    {% block head %} {% endblock %}
+</head>
+
+
+<body style="padding-top: 60px; background: rgba(255,255,255,1);
+background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(47%, rgba(246,246,246,1)), color-stop(100%, rgba(237,237,237,1)));
+background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+background: -o-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+background: -ms-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=1 );">
+
+<nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
+    <button type="button" class="navbar-toggler hidden-sm-up" data-toggle="collapse"
+            data-target="#toggled-navbar"
+            aria-expanded="false" aria-controls="navbar" aria-label="Navigation"></button>
+    <a class="navbar-brand" href="/">Photyshestvie</a>
+    <div id="navbar">
+        <nav class="nav navbar-nav" id="toggled-navbar">
+            <div class="float-xs-left">
+                {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{{ user.get_absolute_url }}">Профиль</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="{% url 'core:login' %}">Авторизация</a>
+                    <a class="nav-item nav-link" href="{% url 'core:register' %}">Регистрация</a>
+                {% endif %}
+
+            </div>
+            <div class="float-xs-right form-inline form-group-sm">
+                {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{% url 'mainpage:logout' %}">Выйти из аккаунта</a>
+                {% else %}
+                    <form action="{% url 'core:login' %}" method="post"> {% csrf_token %}
+                        <label class="sr-only"
+                               style="color:white;">{{ authform.username.label_tag }} </label>{% render_field authform.username placeholder='Username' %}
+                        <label class="sr-only"
+                               style="color:white;">{{ authform.password.label_tag }} </label> {% render_field authform.password placeholder='Password' %}
+                        <input type="hidden" id='id_next' name='next' value='{{ request.path }}'>
+                        <input type="submit" value="Войти" class='btn btn-primary btn-sm'>
+                    </form>
+                {% endif %}
+            </div>
+            {#          <a class="nav-item nav-link" href="#">Help</a>#}
+        </nav>
+        {#        <form class="float-xs-right">#}
+        {#          <input type="text" class="form-control" placeholder="Search...">#}
+        {#        </form>#}
+    </div>
+</nav>
+
+
+{#<br><br><br>#}
+{#<a href="/"><h1><i>Photyshestvie</i></h1></a>#}
+
+{% block content %}{% endblock %}
+<footer style="text-align: center; padding: 0.25rem 0; border-top: .05rem solid #e5e5e5; margin-bottom: 0px;">
+    <p>Footer</p>
+    <p>
+        <a href="#">Back to top</a>
+    </p>
+</footer>
+
+
+<script src="{% static "jquery-3.1.1.js" %}"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js"
+        integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8"
+        crossorigin="anonymous"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+<!--<h1>END</h1> -->
+
+
+</html>

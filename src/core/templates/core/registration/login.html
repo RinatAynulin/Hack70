@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% load staticfiles %}
+{% load widget_tweaks  %}
+{% block head %} <link rel="stylesheet" href="{% static 'signin.css' %} "> {% endblock %}
+
+
+{% block title %} Authorization {% endblock %}
+
+<!-- https://docs.djangoproject.com/en/1.9/topics/auth/default/#all-authentication-views -->
+
+{% block content %}
+
+     <div class="container">
+
+      <form class="form-signin" method="post"> {% csrf_token %}
+        <h2 class="form-signin-heading">Авторизация</h2>
+        <label class="sr-only">Username</label>
+        {% render_field authform.username|attr:'autofocus' placeholder='Username' class+='form-control' %}
+        <label class="sr-only">Password</label>
+          {% render_field authform.password placeholder='Password' class+='form-control' %}
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Войти">
+      </form>
+    </div>
+
+
+    {# Assumes you setup the password_reset view in your URLconf <p><a href="{% url 'password_reset' %}">Lost password?</a></p> #}
+
+    {# <p><a href="./login">Lost password?</a></p> #}
+
+
+
+{% endblock %}
