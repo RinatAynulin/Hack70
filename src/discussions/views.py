@@ -10,7 +10,7 @@ from application.settings import LOGIN_URL
 from comments.models import Comment
 from courses.models import Course
 from discussions.forms import SearchForm, CommentForm
-from discussions.models import Post
+from discussions.models import Post, News
 from django.http import HttpResponseRedirect
 from django.contrib.auth.views import redirect_to_login
 from django.shortcuts import reverse
@@ -24,6 +24,14 @@ class PostListAjax(ListView):
     def get_queryset(self):
         return Course.objects.get(slug=self.kwargs['course_slug']).course_posts.all()
 
+
+class NewsListAjax(ListView):
+    model = News
+    template_name = 'discussions/news_ajax_list.html'
+    context_object_name = 'latest_news'
+
+    def get_queryset(self):
+        return Course.objects.get(slug=self.kwargs['course_slug']).course_news.all()
 
 class PostDetail(DetailView):
     model = Post

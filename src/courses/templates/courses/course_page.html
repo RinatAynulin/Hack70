@@ -83,6 +83,12 @@
                                    aria-expanded="false">Информация о курсе</a>
                             </li>
 
+                            <li class="course-news">
+                                <a href="#course-news" id="course-news" role="tab" data-toggle="tab"
+                                   aria-controls="course-news"
+                                   aria-expanded="false">Новости</a>
+                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -113,6 +119,10 @@
 
         $('.documents').click(function () {
             $('#content').load('{% url 'discussions:discussions_ajax' chair_slug=chair.slug course_slug=course.slug %}');
+        });
+
+        $('.news').click(function () {
+            $('#content').load('{% url 'discussions:discussions_ajax_news' chair_slug=chair.slug course_slug=course.slug %}');
         });
 
 

@@ -1,19 +1,20 @@
-<h2>Latest posts</h2>
-{% for discussion in latest_posts_list %}
-    <div>
-        <h2>
-            {{ discussion.title }}
-            {{ discussion.id }}
-            {{ discussion.author }}
-            {{ discussion.updated_at }}
-            {{ discussion }}
-        </h2>
 
+<h2>Latest posts</h2>
+
+{% for discussion in latest_posts_list %}
+
+    <div class="post">
+        <h1><a href="{% url 'discussions:discussion' chair_slug=discussion.course.chair.slug course_slug=discussion.course.slug pk=discussion.id %}">{{ discussion.title }}</a></h1>
         <p>{{ discussion.content }}</p>
+
+        <div class="meta">
+            {{ discussion.created_at }} |
+            rating: {{ discussion.score }}
+        </div>
     </div>
 
-    {% empty %}
-     <p>No posts are available.</p>
+{% empty %}
+    <p>No posts are available.</p>
 {% endfor %}
 
 
