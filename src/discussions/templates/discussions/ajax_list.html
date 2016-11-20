@@ -1,0 +1,19 @@
+<h2>Latest posts</h2>
+{% for discussion in latest_posts_list %}
+    <div>
+        <h2>
+            {{ discussion.title }}
+            {{ discussion.id }}
+            {{ discussion.author }}
+            {{ discussion.updated_at }}
+            {{ discussion }}
+        </h2>
+
+        <p>{{ discussion.content }}</p>
+    </div>
+
+    {% empty %}
+     <p>No posts are available.</p>
+{% endfor %}
+
+

@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for course in courses %}
+        <h2><a href="{% url 'courses:course_page' chair_slug=course.chair.slug course_slug=course.slug %}">{{ course.title }}</a></h2>
+    {% endfor %}
+{% endblock %}

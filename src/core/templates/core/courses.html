@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row equal">
+                {% for course in courses %}
+                    <h2>
+                        <a href="{% url 'courses:course_page' chair_slug=course.chair.slug course_slug=course.slug %}">{{ course.title }}</a>
+                    </h2>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

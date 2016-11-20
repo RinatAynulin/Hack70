@@ -52,24 +52,35 @@
                     </div>
                     <div class="collapse navbar-collapse" style="margin-top: 50px;">
                         <ul class="nav navbar-nav">
+                            <li>
+                                <h3>{{ course.title }}</h3>
+                            </li>
                             <li class="discussions">
-                                 <a href="#discussions" id="discussions-tab" role="tab" data-toggle="tab" aria-controls="discussions"
+                                <a href="#discussions" id="discussions-tab" role="tab" data-toggle="tab"
+                                   aria-controls="discussions"
                                    aria-expanded="false">Discussions</a>
                             </li>
 
                             <li class="documents">
-                                 <a href="#documents" id="documents-tab" role="tab" data-toggle="tab" aria-controls="documents"
+                                <a href="#documents" id="documents-tab" role="tab" data-toggle="tab"
+                                   aria-controls="documents"
                                    aria-expanded="false">Documents</a>
                             </li>
 
-                             <li class="guides">
-                                 <a href="#guides" id="guides-tab" role="tab" data-toggle="tab" aria-controls="guides"
+                            <li class="guides">
+                                <a href="#guides" id="guides-tab" role="tab" data-toggle="tab" aria-controls="guides"
                                    aria-expanded="false">Guides</a>
                             </li>
 
-                             <li class="videos">
-                                 <a href="#videos" id="videos-tab" role="tab" data-toggle="tab" aria-controls="videos"
+                            <li class="videos">
+                                <a href="#videos" id="videos-tab" role="tab" data-toggle="tab" aria-controls="videos"
                                    aria-expanded="false">Videos</a>
+                            </li>
+
+                            <li class="course-info">
+                                <a href="#course-info" id="course-info-tab" role="tab" data-toggle="tab"
+                                   aria-controls="course-info"
+                                   aria-expanded="false">Информация о курсе</a>
                             </li>
 
                         </ul>
@@ -78,9 +89,8 @@
             </nav>
         </div>
 
-        <div class="col-sm-9 col-lg-10">
-            <div id="content" class="tab-content">
-            dasdsadasdasdas
+        <div class="col-sm-9 col-lg-10" style="margin-top: 80px;">
+            <div id="content">
             </div>
         </div>
     </div>
@@ -94,15 +104,18 @@
 <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
 <script>
     $(document).ready(function () {
+        $('.course-info').click(function () {
+            $('#content').load('{% url 'courses:course_info' chair_slug=chair.slug course_slug=course.slug %}');
+        });
         $('.discussions').click(function () {
-            $('#content').load('{% url 'core:logout' %}');
+            $('#content').load('{% url 'discussions:discussions_ajax' chair_slug=chair.slug course_slug=course.slug %}');
         });
-    })
 
-    $(document).ready(function () {
         $('.documents').click(function () {
-            $('#content').load('{% url 'core:register' %}');
+            $('#content').load('{% url 'discussions:discussions_ajax' chair_slug=chair.slug course_slug=course.slug %}');
         });
+
+
     })
 </script>
 
