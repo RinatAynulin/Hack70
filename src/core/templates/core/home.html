@@ -7,28 +7,20 @@
 {% endblock %}
 
 {% block content %}
-    <div class="jumbotron">
-        <h1 style="margin-left: 50px;">Departments</h1>
+<div class="jumbotron">
+    <h1 style="margin-left: 50px;">Кафедры</h1>
+</div>
+<div class="container">
+    <div class="row equal" data-toggle="buttons-radio">
+        {% for chair in chairs %}
+        <div class="col-md-4">
+            <a href="{% url 'core:courses' chair.slug %}" class="btn btn-default btn-block">
+                <h2>{{ chair.title }}</h2>
+                {# <img src="image/mipt.png" data-src="holder.js/100%x180" alt="...">#}
+            </a>
         </div>
-        <div class="container">
-            <div class="row equal" data-toggle="buttons-radio">
-                {% for chair in chairs %}
-                <div class="col-md-4">
-                    <a href="{% url 'core:courses' chair.slug %}" class="btn btn-default btn-block">
-                        <h2>{{ chair.title }}</h2>
-{#                        <img src="image/mipt.png" data-src="holder.js/100%x180" alt="...">#}
-                    </a>
-                </div>
-                {% endfor %}
-                {% for chair in chairs %}
-                <div class="col-md-4">
-                    <a href="{% url 'core:courses' chair.slug %}" class="btn btn-default btn-block" type="button">
-                        <h2>{{ chair.title }}</h2>
-{#                        <img src="image/mipt.png" data-src="holder.js/100%x180" alt="...">#}
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}
