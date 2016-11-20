@@ -61,3 +61,6 @@ def courses(request, chair_slug):
 def mipt_news(request):
     feeds = feedparser.parse('https://mipt.ru/news/rss.php')
     return render(request, 'core/rss.html', {'feeds': feeds})
+
+def user_courses(request):
+    return render(request, 'core/user_courses.html')

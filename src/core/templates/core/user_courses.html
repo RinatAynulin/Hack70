@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="padding: 60px">
+        <div class="courses">
+            {% for course in user.courses.all %}
+                <h1> <a href="{% url 'courses:course_page' chair_slug=course.chair.slug course_slug=course.slug %}">{{ course.title }}</a></h1>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

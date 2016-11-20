@@ -58,6 +58,20 @@
                                    aria-expanded="false">Новости</a>
                             </li>
 
+                            <li class="course-members">
+                                <a href="#course-members" id="course-members" role="tab" data-toggle="tab"
+                                   aria-controls="course-members"
+                                   aria-expanded="false">Участники</a>
+                            </li>
+
+                            {% if user.is_authenticated %}
+                            <li class="add-course">
+                                <a href="#add-course" id="add-course" role="tab" data-toggle="tab"
+                                   aria-controls="add-course"
+                                   aria-expanded="false">Добавить курс</a>
+                            </li>
+                            {% endif %}
+
                         </ul>
                     </div>
                 </div>
@@ -94,7 +108,24 @@
             $('#content').load('{% url 'discussions:discussions_ajax_news' chair_slug=chair.slug course_slug=course.slug %}');
         });
 
+        $('.course-members').click(function () {
+            $('#content').load('{% url 'courses:course_members' chair_slug=chair.slug course_slug=course.slug %}');
+        });
 
+        $('.add-course').click(function(){
+      $.ajax({
+               type: "POST",
+               url: "{% url 'courses:add_course' chair_slug=chair.slug course_slug=course.slug  %}",
+               data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+               dataType: "json",
+               success: function(response) {
+                      alert(response.message);
+                },
+                error: function(rs, e) {
+                       alert(rs.responseText);
+                }
+          });
+    });
     })
 </script>
 

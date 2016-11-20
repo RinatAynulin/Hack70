@@ -27,6 +27,7 @@
                 <li><a href="{% url 'core:mipt_news'%}">Новости</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'core:user' slug=user.username %}">Профиль</a></li>
+                    <li><a href="{% url 'core:user_courses'%}">Мои курсы</a></li>
                     <li><a href="{% url 'core:logout' %}">Выйти</a></li>
                 {% else %}
                     <li><a href="{% url 'core:login' %}">Войти</a></li>

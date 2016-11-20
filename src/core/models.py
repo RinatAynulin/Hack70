@@ -3,6 +3,9 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import AbstractUser, AbstractBaseUser
 
+from courses.models import Course
+
+
 class User(AbstractUser):
     avatar = models.ImageField(u'фото профиля',upload_to='avatars', blank=False, default=u'avatars/default-avatar.jpg')
     first_name = models.CharField(u'имя', max_length=30, blank=False)
@@ -14,6 +17,7 @@ class User(AbstractUser):
     USER_TYPE = ((None, u'Ваша должность'), (u'Студент', u'Студент'), (u'Преподаватель', u'Преподаватель'))
     user_type = models.CharField(u'должность', choices=USER_TYPE, max_length=25, blank=False)
 
+    courses = models.ManyToManyField(Course, related_name='members')
 
     class Meta:
         verbose_name = 'Пользователь'

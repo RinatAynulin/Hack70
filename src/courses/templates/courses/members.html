@@ -1,0 +1,10 @@
+{% if members %}
+    {{ test }}
+    {% for member in members %}
+        {{ test }}
+    <a href="{% url 'core:user' slug=member.username %}">{{ member.username }}</a>
+
+    {% endfor %}
+{% else %}
+<p>No users yet</p>
+{% endif %}
