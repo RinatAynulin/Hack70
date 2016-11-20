@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from .views import home, UserView, RegisterView, UserEdit, courses
+from .views import home, UserView, RegisterView, UserEdit, courses, mipt_news
 from django.contrib import admin
 from django.contrib.auth.views import login, logout, password_change
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -18,6 +18,7 @@ from application.settings import LOGIN_URL
 
 urlpatterns = [
     url(r'^$', home, name='mainpage'),
+    url(r'^mipt_news/', mipt_news, name='mipt_news'),
     url(r'^accounts/logout/$', login_required(logout, login_url=LOGIN_URL), {'next_page' : '/'}, name='logout'),
     url(r'^accounts/login/$', login,{'template_name' : 'core/registration/login.html',
                                      'redirect_authenticated_user': True,
@@ -30,4 +31,5 @@ urlpatterns = [
     url(r'^users/(?P<slug>\w+)/$', login_required(UserView.as_view(), login_url=LOGIN_URL), name="user"),
     url(r'^accounts/user_edit/$', login_required(UserEdit.as_view(), login_url=LOGIN_URL), name="user_edit"),
     url(r'^(?P<chair_slug>\w+)/$', courses, name='courses'),
+
 ]

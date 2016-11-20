@@ -1,5 +1,5 @@
 # coding: utf-8
-
+import feedparser
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView
@@ -56,3 +56,8 @@ def home(request):
 def courses(request, chair_slug):
     courses = Chair.objects.get(slug=chair_slug).chair_courses.all()
     return render(request, 'core/courses.html', {'courses': courses})
+
+
+def mipt_news(request):
+    feeds = feedparser.parse('https://mipt.ru/news/rss.php')
+    return render(request, 'core/rss.html', {'feeds': feeds})
