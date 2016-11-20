@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block head %}
-<link href="{% static 'bootstrap/css/jumbotron-narrow.css' %}" rel="stylesheet">
+<link href="{% static 'bootstrap/css/jumbotron.css' %}" rel="stylesheet">
     <style>
     .btn-toolbar .btn {
     margin-bottom: 25px;  }
@@ -19,8 +19,8 @@
         {% for course in courses %}
         <div class="col-md-4 btn-toolbar">
             <a href="{% url 'courses:course_page' chair_slug=course.chair.slug course_slug=course.slug %}"
-               class="btn btn-default btn-block">
-                <h2>{{ course.title }}</h2>
+               class="btn btn-default btn-block" style="word-wrap: break-word;">
+                <h3>{{ course.title }}</h3>
             </a>
         </div>
         {% endfor %}
