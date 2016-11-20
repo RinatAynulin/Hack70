@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'courses',
     'votes',
     'content',
+    'docs',
     'widget_tweaks',
 
 ]
