@@ -5,6 +5,7 @@
     {% block title %}<title>lol</title> {% endblock %}
     <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'bootstrap/navbar-fixed-side.css' %}" rel="stylesheet">
+    {% block head %} {% endblock %}
 </head>
 <body>
 
@@ -23,10 +24,16 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
+                <li><a href="#">Новости</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="#">Профиль</a></li>
+                    <li><a href="#">Выйти</a></li>
+                {% else %}
+                    <li><a href="#">Войти</a></li>
+                    <li><a href="#">Регистрация</a></li>
+                {% endif %}
+
+                <li><a href="#">Информация</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
