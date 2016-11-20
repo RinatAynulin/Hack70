@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="padding: 60px">
+        <div class="courses">
+            {% if courses %}
+                {% for course in courses %}
+                    <h1>
+                        <a href="{% url 'courses:course_page' chair_slug=course.chair.slug course_slug=course.slug %}">{{ course.title }}</a>
+                    </h1>
+                {% endfor %}
+                </div>
+            {% else %}
+                <h1>Курсов, соответствующих данному запросу, не найдено</h1>
+            {% endif %}
+    </div>
+{% endblock %}

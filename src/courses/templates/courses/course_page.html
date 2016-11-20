@@ -112,6 +112,10 @@
             $('#content').load('{% url 'courses:course_members' chair_slug=chair.slug course_slug=course.slug %}');
         });
 
+        $('.videos').click(function () {
+            $('#content').load('{% url 'core:video' %}');
+        });
+
         $('.add-course').click(function(){
       $.ajax({
                type: "POST",
