@@ -89,3 +89,6 @@ def user_courses(request):
 
 def video_useless(request):
     return render(request, 'core/video_useless.html')
+
+def guides_temp(request):
+    return render(request, 'core/guides_temp.html')
