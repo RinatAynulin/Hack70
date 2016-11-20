@@ -1,1 +1,58 @@
-<!--{{ current_post }}-->
+{% extends "base.html" %}
+
+{% block title %} {{ current_post.title }} {% endblock %}
+{% block header %} {{ current_post.title }} {% endblock %}
+{% block content %}
+
+    <h2>{{ current_post.title }}</h2>
+    <p>{{ current_post.content }}</p>
+    {{ current_post.created_at }} | by
+    <a target="_blank" href="/users/{{ current_post.user.id }}/">{{ current_post.user }} </a> | rating:
+    {{ current_post.score }}
+    {#    {% if user == post.user %} <a href="{% url 'posts:edit' post.id %}">Edit</a>  {% endif %}#}
+
+    <h5>{{ current_post.comments.count }} comments:</h5>
+    {% if current_post.comments.all %}
+
+        {% for comment in current_post.comments.all %}
+            <div class="center-block">
+            <div class="row">
+                <div class="col-sm-5" style="width:500px">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>{{ comment.author }} </strong> <span
+                                class="text-muted">commented {{ comment.created_at }}</span>
+                            <div class="panel-body" style="word-break: break-all">
+                                <div width="500px">{{ comment.text }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+
+    {% else %}
+        <p>No comments are available.</p>
+    {% endif %}
+
+{% if user.is_anonymous %}
+    <h5>You must be logged in in order to add comments!</h5>
+    <a href="{% url "core:login" %}?next={{ request.path }}">Log in</a>
+{% else %}
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            {{ comment_form.comment }}
+
+            {% for error in comment_form.content.errors %}
+                <div><b>{{ error }}</b></div>
+            {% endfor %}
+        </div>
+        <div>
+            <input type="submit" value="Send comment">
+        </div>
+    </form>
+{% endif %}
+
+{% endblock %}

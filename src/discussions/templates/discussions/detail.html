@@ -12,20 +12,33 @@
 
     <h5>{{ post.comments_count }} comments:</h5>
     {% if post.post_comments.all %}
-        <ul>
-            {% for comment in post.post_comments.all %}
-                <div class="center-block">
-                    <li>{{ comment.content }}</li>
-                    <p>
-                        by {{ comment.user }} at {{ comment.created_at }}
-                        {% if comment.user == user %}
-                            <a href="{% url "comments:edit" pk=comment.id %}">Edit</a>
-                        {% endif %}
-                    </p>
-
+{#        <ul>#}
+{#            {% for comment in post.comments.all %}#}
+{#                <div class="center-block">#}
+{#                    <li>{{ comment.content }}</li>#}
+{#                    <p>#}
+{#                        by {{ comment.user }} at {{ comment.created_at }}#}
+{#                        {% if comment.user == user %}#}
+{#                            <a href="{% url "comments:edit" pk=comment.id %}">Edit</a>#}
+{#                        {% endif %}#}
+{#                    </p>#}
+{##}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+        {% for comment in post.comments.all %}
+         <div class="row">
+                <div class="col-sm-5">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>{{ comment.user }} </strong> <span class="text-muted">commented {{ comment.created_at }}</span>
+                        <div class="panel-body">
+                            {{ comment.text }}
+                        </div>
+                    </div>
                 </div>
-            {% endfor %}
-        </ul>
+            </div>
+        {% endfor %}
     {% else %}
         <p>No comments are available.</p>
     {% endif %}

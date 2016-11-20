@@ -36,7 +36,7 @@ class NewsListAjax(ListView):
 class PostDetail(DetailView):
     model = Post
     context_object_name = 'current_post'
-    template_name = 'discussions/test.html'
+    template_name = 'discussions/discussion.html'
     # fields = ('content',)
     success_url = '.'
 

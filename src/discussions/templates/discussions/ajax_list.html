@@ -4,7 +4,7 @@
 {% for discussion in latest_posts_list %}
 
     <div class="post">
-        <h1><a href="{% url 'discussions:discussion' chair_slug=discussion.course.chair.slug course_slug=discussion.course.slug pk=discussion.id %}">{{ discussion.title }}</a></h1>
+        <h1><a target="_blank" href="{% url 'discussions:discussion' chair_slug=discussion.course.chair.slug course_slug=discussion.course.slug pk=discussion.id %}">{{ discussion.title }}</a></h1>
         <p>{{ discussion.content }}</p>
 
         <div class="meta">
