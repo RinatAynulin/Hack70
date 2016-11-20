@@ -26,8 +26,8 @@ class PostListAjax(ListView):
 
 class PostDetail(DetailView):
     model = Post
-    context_object_name = 'post'
-    template_name = 'discussions/detail.html'
+    context_object_name = 'current_post'
+    template_name = 'discussions/test.html'
     # fields = ('content',)
     success_url = '.'
 
@@ -45,6 +45,9 @@ class PostDetail(DetailView):
         context = super(PostDetail, self).get_context_data(**kwargs)
         context['comment_form'] = self.comment_form
         return context
+
+    def get_queryset(self):
+        return Post.objects.filter(course__slug=self.kwargs['course_slug']).filter(course__chair__slug=self.kwargs['chair_slug'])
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()

@@ -1,29 +1,28 @@
-from django.db import models
+# coding: utf-8
+
 from django.conf import settings
+from django.db import models
+from django.db.models import TextField, DateTimeField, ForeignKey, Model, PositiveIntegerField
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
 
-# Create your models here.
+class Comment(Model):
+    author = ForeignKey(settings.AUTH_USER_MODEL, blank=False, related_name='comments', verbose_name='Автор')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'дата публикации')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=u'дата изменения')
 
-class GeneralModel(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="user_comments")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    content_type = ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    comments = GenericRelation('comments.Comment', related_name = 'comments')
 
+    text = TextField(blank=False, max_length=1024, verbose_name='комментарий')
 
-class Comment(GeneralModel):
-    parent = models.ForeignKey(
-        'self', related_name='children',
-        verbose_name=u'parent',
-        blank=True, null=True,
-    )
-    content = models.TextField()
-    post = models.ForeignKey('discussions.Post', related_name='post_comments')
 
     class Meta:
-        verbose_name = u'Comment'
-        verbose_name_plural = u'Comments'
         ordering = ('-created_at',)
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
 
-
-    def __unicode__(self):
-        return self.content
-
+    def __str__(self):
+        return '%i by %s' % (self.content_object.id, self.author)

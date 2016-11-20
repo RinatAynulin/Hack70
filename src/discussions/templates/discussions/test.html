@@ -1,0 +1,6 @@
+{{ current_post.content }} <br>
+{{ current_post.score }} <br>
+
+{% for comment in current_post.comments.all %}
+    {{ comment.text }}
+{% endfor %}
