@@ -86,3 +86,6 @@ def mipt_news(request):
 
 def user_courses(request):
     return render(request, 'core/user_courses.html')
+
+def video_useless(request):
+    return render(request, 'core/video_useless.html')
