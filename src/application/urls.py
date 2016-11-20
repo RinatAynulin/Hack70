@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^', include('core.urls', namespace='core')),
     url(r'^courses/', include('courses.urls', namespace='courses')),
     url(r'^study/', include('discussions.urls', namespace='discussions')),
+    url(r'^study/', include('docs.urls', namespace='docs')),
 
 ]

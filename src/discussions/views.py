@@ -73,11 +73,3 @@ class PostDetail(DetailView):
             comment.object_id = self.object.pk
             comment.save()
         return HttpResponseRedirect(self.success_url)
-
-    # def form_valid(self, form):
-    #     form.instance.user = self.request.user
-    #     form.instance.post = self.current_post
-    #     return super(PostDetail, self).form_valid(form)
-    #
-    # def get_success_url(self):
-    #     return '.'

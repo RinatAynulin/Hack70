@@ -1,5 +1,5 @@
 from django import forms
-
+from .models import Post
 
 class SearchForm(forms.Form):
     q = forms.CharField(max_length=100)
@@ -12,3 +12,7 @@ class CommentForm(forms.Form):
         if text.isspace():
             raise forms.ValidationError(u'Empty string!')
         return text
+
+class PostCreateForm(forms.ModelForm):
+    model = Post
+    fields = ['title', 'content', 'course']
