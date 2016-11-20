@@ -8,6 +8,7 @@ from django.http import request, HttpResponseRedirect
 from django.template import RequestContext
 from django.urls import reverse
 
+from courses.models import Chair
 from .models import User
 from .forms import RegistrationForm
 
@@ -48,4 +49,10 @@ class RegisterView(CreateView):
 
 
 def home(request):
-    return render(request, 'core/home.html')
+    chairs = Chair.objects.all()
+    return render(request, 'core/home.html', {'chairs': chairs})
+
+
+def courses(request, chair_slug):
+    courses = Chair.objects.get(slug=chair_slug).chair_courses.all()
+    return render(request, 'core/courses.html', {'courses': courses})

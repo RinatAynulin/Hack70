@@ -8,6 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 from application.settings import LOGIN_URL
 
 from comments.models import Comment
+from courses.models import Course
 from discussions.forms import SearchForm, CommentForm
 from discussions.models import Post
 from django.http import HttpResponseRedirect
@@ -16,12 +17,12 @@ from django.shortcuts import reverse
 
 
 class PostListAjax(ListView):
+    model = Post
     template_name = 'discussions/ajax_list.html'
     context_object_name = 'latest_posts_list'
-    model = Post
 
     def get_queryset(self):
-        return Post.objects.all()
+        return Course.objects.get(slug=self.kwargs['course_slug']).course_posts.all()
 
 
 class PostDetail(DetailView):

@@ -1,29 +1,19 @@
 from django.shortcuts import render
 
 # Create your views here.
+from django.views.generic import DetailView
 from django.views.generic import ListView
 
 from courses.models import Chair, Course
 
 
-def course_page(request):
-    return render(request, 'courses/course_page.html')
+def course_page(request, chair_slug, course_slug):
+    chair = Chair.objects.get(slug=chair_slug)
+    course = Course.objects.get(slug=course_slug)
+    return render(request, 'courses/course_page.html', {'chair': chair, 'course': course})
 
 
-class ChairList(ListView):
-    template_name = 'courses/chairs.html'
-    context_object_name = 'chairs'
-    model = Chair
-
-    def get_queryset(self):
-        return Chair.objects.all()
-
-
-class CourseList(ListView):
-    template_name = 'courses/courses.html'
-    context_object_name = 'courses'
-    model = Course
-
-
-    def get_queryset(self):
-        return Course.objects.all()
+def course_info(request, chair_slug, course_slug):
+    chair = Chair.objects.get(slug=chair_slug)
+    course = Course.objects.get(slug=course_slug)
+    return render(request, 'courses/course_info.html', {'chair': chair, 'course': course})

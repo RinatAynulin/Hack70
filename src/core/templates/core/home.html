@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row equal">
+                {% for chair in chairs %}
+                <div class="col-xs-6 col-md-3">
+                    <a href="{% url 'core:courses' chair.slug %}" class="thumbnail">
+                        <h2>{{ chair.title }}</h2>
+{#                        <img src="image/mipt.png" data-src="holder.js/100%x180" alt="...">#}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
