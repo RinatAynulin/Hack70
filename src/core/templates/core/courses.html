@@ -4,16 +4,20 @@
 
 {% block head %}
 <link href="{% static 'bootstrap/css/jumbotron-narrow.css' %}" rel="stylesheet">
+    <style>
+    .btn-toolbar .btn {
+    margin-bottom: 25px;  }
+    </style>
 {% endblock %}
 
 {% block content %}
 <div class="jumbotron">
-    <h1 style="margin-left: 50px;">Курсы кафедры {{courses.first.chair.title}}</h1>
+    <h1 style="margin-left: 50px;">{{courses.first.chair.title}}. Курсы.</h1>
 </div>
-<div class="container">
+<div class="container-fluid">
     <div class="row equal" data-toggle="buttons-radio">
         {% for course in courses %}
-        <div class="col-md-4">
+        <div class="col-md-4 btn-toolbar">
             <a href="{% url 'courses:course_page' chair_slug=course.chair.slug course_slug=course.slug %}"
                class="btn btn-default btn-block">
                 <h2>{{ course.title }}</h2>

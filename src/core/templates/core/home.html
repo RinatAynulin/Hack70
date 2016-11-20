@@ -4,18 +4,23 @@
 
 {% block head %}
 <link href="{% static 'bootstrap/css/jumbotron-narrow.css' %}" rel="stylesheet">
+    <style>
+    .btn-toolbar .btn {
+    margin-bottom: 25px;  }
+
+    </style>
 {% endblock %}
 
 {% block content %}
 <div class="jumbotron">
     <h1 style="margin-left: 50px;">Кафедры</h1>
 </div>
-<div class="container">
+<div class="container-fluid" style="margin-bottom: 10px">
     <div class="row equal" data-toggle="buttons-radio">
         {% for chair in chairs %}
-        <div class="col-md-4">
-            <a href="{% url 'core:courses' chair.slug %}" class="btn btn-default btn-block">
-                <h2>{{ chair.title }}</h2>
+        <div class="col-md-4 btn-toolbar">
+            <a href="{% url 'core:courses' chair.slug %}" class=" btn btn-default btn-block">
+                <h3>{{ chair.title }}</h3>
                 {# <img src="image/mipt.png" data-src="holder.js/100%x180" alt="...">#}
             </a>
         </div>

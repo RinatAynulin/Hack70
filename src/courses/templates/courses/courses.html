@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+{% block head %}
+<link href="{% static 'bootstrap/css/jumbotron-narrow.css' %}" rel="stylesheet">
+    <style>
+    .btn-toolbar .btn {
+    margin-bottom: 25px;  }
+
+    </style>
+{% endblock %}
+
 {% block content %}
     {% for course in courses %}
         <h2><a href="{% url 'courses:course_page' chair_slug=course.chair.slug course_slug=course.slug %}">{{ course.title }}</a></h2>

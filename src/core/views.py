@@ -58,7 +58,7 @@ class CourseSearch(ListView):
 
     def get_queryset(self):
         if self.q:
-            return Course.objects.filter(Q(description__contains=self.q) | Q(title__contains=self.q))
+            return Course.objects.filter(Q(description__icontains=self.q) | Q(title__icontains=self.q))
         return Course.objects.all()
 
     def dispatch(self, request, *args, **kwargs):
