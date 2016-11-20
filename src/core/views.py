@@ -1,16 +1,18 @@
 # coding: utf-8
 import feedparser
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView
+from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.conf import settings
 from django.http import request, HttpResponseRedirect
 from django.template import RequestContext
 from django.urls import reverse
 
-from courses.models import Chair
+from courses.models import Chair, Course
 from .models import User
-from .forms import RegistrationForm
+from .forms import RegistrationForm, NavSearchForm
 
 
 class UserView(DetailView):
@@ -48,6 +50,25 @@ class RegisterView(CreateView):
         return reverse(self.success_url)
 
 
+class CourseSearch(ListView):
+    template_name = 'core/search.html'
+    context_object_name = 'courses'
+    model = Course
+    form_class = NavSearchForm
+
+    def get_queryset(self):
+        if self.q:
+            return Course.objects.filter(Q(description__contains=self.q) | Q(title__contains=self.q))
+        return Course.objects.all()
+
+    def dispatch(self, request, *args, **kwargs):
+        self.q = ""
+        self.search_form = NavSearchForm(request.GET or None)
+        if self.search_form.is_valid():
+            self.q = self.search_form.cleaned_data['q']
+        return super(CourseSearch, self).dispatch(request, *args, **kwargs)
+
+
 def home(request):
     chairs = Chair.objects.all()
     return render(request, 'core/home.html', {'chairs': chairs})
@@ -62,5 +83,9 @@ def mipt_news(request):
     feeds = feedparser.parse('https://mipt.ru/news/rss.php')
     return render(request, 'core/rss.html', {'feeds': feeds})
 
+
 def user_courses(request):
     return render(request, 'core/user_courses.html')
+
+def video_useless(request):
+    return render(request, 'core/video_useless.html')
