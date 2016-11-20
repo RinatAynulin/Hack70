@@ -45,3 +45,4 @@ class News(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     course = models.ForeignKey('courses.Course', related_name='course_news')
+

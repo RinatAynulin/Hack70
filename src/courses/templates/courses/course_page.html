@@ -121,7 +121,7 @@
             $('#content').load('{% url 'discussions:discussions_ajax' chair_slug=chair.slug course_slug=course.slug %}');
         });
 
-        $('.news').click(function () {
+        $('.course-news').click(function () {
             $('#content').load('{% url 'discussions:discussions_ajax_news' chair_slug=chair.slug course_slug=course.slug %}');
         });
 

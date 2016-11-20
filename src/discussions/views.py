@@ -28,7 +28,7 @@ class PostListAjax(ListView):
 class NewsListAjax(ListView):
     model = News
     template_name = 'discussions/news_ajax_list.html'
-    context_object_name = 'latest_news'
+    context_object_name = 'latest_news_list'
 
     def get_queryset(self):
         return Course.objects.get(slug=self.kwargs['course_slug']).course_news.all()
