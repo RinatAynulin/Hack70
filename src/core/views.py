@@ -15,7 +15,7 @@ from .forms import RegistrationForm
 
 class UserView(DetailView):
     model = User
-    template_name = 'core/user.html'
+    template_name = 'core/user_profile.html'
     slug_field = 'username'
     context_object_name = 'user_account'
 

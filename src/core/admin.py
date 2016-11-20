@@ -5,7 +5,7 @@ from .models import User
 
 class UserAdmin(BaseUserAdmin):
     fieldsets = (
-        ('User info', {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'avatar', 'is_staff', 'is_superuser',)}),
+        ('User info', {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'user_type' , 'avatar', 'is_staff', 'is_superuser',)}),
     )
 
     add_fieldsets = (
