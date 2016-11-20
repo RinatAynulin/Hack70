@@ -4,12 +4,12 @@
 {% for docs in latest_docs_list %}
 
     <div class="post">
-        <h1><a target="_blank" href="{% url 'discussions:discussion' chair_slug=docs.course.chair.slug course_slug=docs.course.slug pk=discussion.id %}">{{ docs.title }}</a></h1>
+        <h1><a target="_blank" href="{% url 'docs:doc' chair_slug=docs.course.chair.slug course_slug=docs.course.slug pk=docs.id %}">{{ docs.title }}</a></h1>
         <p>{{ docs.content }}</p>
 
         <div class="meta">
             {{ docs.created_at }} |
-            rating: {{ discussion.score }}
+            rating: {{ docs.score }}
         </div>
     </div>
 
