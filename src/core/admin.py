@@ -5,13 +5,13 @@ from .models import User
 
 class UserAdmin(BaseUserAdmin):
     fieldsets = (
-        ('User info', {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'user_type' , 'avatar', 'is_staff', 'is_superuser',)}),
+        ('User info', {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'user_type' , 'avatar', 'permission', 'is_staff', 'is_superuser',)}),
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'is_staff', 'is_superuser', 'avatar'),
+            'fields': ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'is_staff', 'user_type', 'permission', 'is_superuser', 'avatar'),
         }),
     )
 

@@ -2,9 +2,10 @@
 
 <html>
 <head>
-    {% block title %}<title>lol</title> {% endblock %}
+    <title>{% block title %}lol{% endblock %}</title>
     <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'bootstrap/navbar-fixed-side.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
     {% block head %} {% endblock %}
 </head>
 <body>
@@ -26,7 +27,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{% url 'core:mipt_news'%}">Новости</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="#">Профиль</a></li>
+                    <li><a href="{% url 'core:user' slug=user.username %}">Профиль</a></li>
                     <li><a href="{% url 'core:logout' %}">Выйти</a></li>
                 {% else %}
                     <li><a href="{% url 'core:login' %}">Войти</a></li>

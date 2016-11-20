@@ -1,7 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 
-# Create your views here.
 from django.views.generic import CreateView, DetailView
 from django.views.generic import ListView
 from django.contrib.contenttypes.models import ContentType
@@ -41,11 +40,6 @@ class PostDetail(DetailView):
     success_url = '.'
 
     def dispatch(self, request, pk=None, *args, **kwargs):
-        # when I used name 'post' instead of 'current_post', it rewrited field post (it's post request),
-        # and some **it happened
-        # self.current_post = get_object_or_404(Post, id=pk)
-        # return super(PostDetail, self).dispatch(request, *args, **kwargs)
-
         self.user = request.user
         self.comment_form = CommentForm
         return super(PostDetail, self).dispatch(request, *args, **kwargs)
@@ -62,7 +56,6 @@ class PostDetail(DetailView):
         self.object = self.get_object()
         form = self.comment_form(request.POST)
         if request.user.is_anonymous():
-            #TODO
             return redirect_to_login(next=reverse('courses:discussion', args=[str(self.object.course.chair.slug),
                                                                                 str(self.object.course.slug),str(self.object.pk)]), login_url=LOGIN_URL)
         if form.is_valid():
