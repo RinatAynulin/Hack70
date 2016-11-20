@@ -27,10 +27,10 @@
                 <li><a href="#">Новости</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="#">Профиль</a></li>
-                    <li><a href="#">Выйти</a></li>
+                    <li><a href="{% url 'core:logout' %}">Выйти</a></li>
                 {% else %}
-                    <li><a href="#">Войти</a></li>
-                    <li><a href="#">Регистрация</a></li>
+                    <li><a href="{% url 'core:login' %}">Войти</a></li>
+                    <li><a href="{% url 'core:register' %}">Регистрация</a></li>
                 {% endif %}
 
                 <li><a href="#">Информация</a></li>
@@ -42,8 +42,6 @@
     </div>
 </nav>
 
-<div style="padding: 60px">
 {% block content %}
 
 {% endblock %}
-</div>

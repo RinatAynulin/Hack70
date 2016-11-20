@@ -3,7 +3,7 @@
 {% block title %} {{ current_post.title }} {% endblock %}
 {% block header %} {{ current_post.title }} {% endblock %}
 {% block content %}
-
+<div style="padding: 60px">
     <h2>{{ current_post.title }}</h2>
     <p>{{ current_post.content }}</p>
     {{ current_post.created_at }} | by
@@ -54,5 +54,5 @@
         </div>
     </form>
 {% endif %}
-
+</div>
 {% endblock %}
