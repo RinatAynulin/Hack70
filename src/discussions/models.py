@@ -12,6 +12,8 @@ class GeneralModel(models.Model):
 
     votes = GenericRelation('votes.Vote', related_name='votes')
     comments = GenericRelation('comments.Comment', related_name = 'comments')
+    class Meta:
+        abstract = True
 
 class Post(GeneralModel):
     title = models.CharField(max_length=255)
