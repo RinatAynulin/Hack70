@@ -1,41 +1,10 @@
+{% extends "base.html" %}
 {% load staticfiles %}
 
-<html>
-<head>
-    <title>lol</title>
-    <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
-    <link href="{% static 'bootstrap/navbar-fixed-side.css' %}" rel="stylesheet">
-</head>
-<body>
+{% block title %} Курсы {% endblock %}
 
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
-        </div>
-    </div>
-</nav>
-
-
+{% block content %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-lg-2">
@@ -45,36 +14,36 @@
                         <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
+                            <!--<span class="icon-bar"></span>-->
+                            <!--<span class="icon-bar"></span>-->
                         </button>
-                        <a class="navbar-brand" href="./">BS3 Side Navbar</a>
+                        <!--<a class="navbar-brand" href="./">BS3 Side Navbar</a>-->
                     </div>
                     <div class="collapse navbar-collapse" style="margin-top: 50px;">
                         <ul class="nav navbar-nav">
                             <li>
-                                <h3>{{ course.title }}</h3>
+                                <h3 align="center">{{ course.title }}</h3>
                             </li>
                             <li class="discussions">
                                 <a href="#discussions" id="discussions-tab" role="tab" data-toggle="tab"
                                    aria-controls="discussions"
-                                   aria-expanded="false">Discussions</a>
+                                   aria-expanded="false">Вопросы</a>
                             </li>
 
                             <li class="documents">
                                 <a href="#documents" id="documents-tab" role="tab" data-toggle="tab"
                                    aria-controls="documents"
-                                   aria-expanded="false">Documents</a>
+                                   aria-expanded="false">Документы</a>
                             </li>
 
                             <li class="guides">
                                 <a href="#guides" id="guides-tab" role="tab" data-toggle="tab" aria-controls="guides"
-                                   aria-expanded="false">Guides</a>
+                                   aria-expanded="false">Пособия</a>
                             </li>
 
                             <li class="videos">
                                 <a href="#videos" id="videos-tab" role="tab" data-toggle="tab" aria-controls="videos"
-                                   aria-expanded="false">Videos</a>
+                                   aria-expanded="false">Видео</a>
                             </li>
 
                             <li class="course-info">
@@ -129,5 +98,4 @@
     })
 </script>
 
-</body>
-</html>
+{% endblock %}
