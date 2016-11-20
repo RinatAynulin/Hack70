@@ -41,11 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'discussions',
+    'docs',
     'comments',
     'courses',
     'votes',
     'content',
-    'docs',
     'widget_tweaks',
 
 ]

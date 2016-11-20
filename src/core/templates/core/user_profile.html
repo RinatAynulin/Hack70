@@ -39,9 +39,10 @@
                             <div class="profile-user-info profile-info-row">
                                 <div class="profile-info-name"> Должность </div>
                                 <div class="profile-info-value"> {{ user_account.user_type }} </div>
+                                {% if user_account.permission > 0 %}
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                {% endif %}
                             </div>
-
-
 
                         </div><!-- /.col -->
                     </div>

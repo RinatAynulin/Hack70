@@ -1,0 +1,20 @@
+
+<h2>Latest posts</h2>
+
+{% for docs in latest_docs_list %}
+
+    <div class="post">
+        <h1><a target="_blank" href="{% url 'discussions:discussion' chair_slug=docs.course.chair.slug course_slug=docs.course.slug pk=discussion.id %}">{{ docs.title }}</a></h1>
+        <p>{{ docs.content }}</p>
+
+        <div class="meta">
+            {{ docs.created_at }} |
+            rating: {{ discussion.score }}
+        </div>
+    </div>
+
+{% empty %}
+    <p>No posts are available.</p>
+{% endfor %}
+
+

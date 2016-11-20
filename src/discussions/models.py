@@ -3,6 +3,7 @@ from django.conf import settings
 from comments.models import Comment
 from votes.models import Vote
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.models import ContentType
 
 
 class GeneralModel(models.Model):
@@ -31,12 +32,11 @@ class Post(GeneralModel):
         return self.title
 
     def score(self):
-        from django.contrib.contenttypes.models import ContentType
         return Vote.objects.filter(object_id=self.pk).filter(content_type=ContentType.objects.get_for_model(self)) \
                    .aggregate(models.Sum('vote_type')).get('vote_type__sum') or 0
 
     def comments_count(self):
-        return Comment.objects.filter(post=self).count()
+        return Comment.objects.filter(object_id=self.pk).filter(content_type=ContentType.objects.get_for_model(self)).count()
 
 
 class News(models.Model):
